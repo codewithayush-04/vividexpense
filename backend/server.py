@@ -199,7 +199,9 @@ async def create_expense(expense_data: ExpenseCreate, user_id: str = Depends(get
     
     await db.expenses.insert_one(expense_doc)
     
-    return Expense(**expense_doc, created_at=datetime.fromisoformat(expense_doc['created_at']))
+    # Convert created_at string back to datetime for the response model
+    expense_doc['created_at'] = datetime.fromisoformat(expense_doc['created_at'])
+    return Expense(**expense_doc)
 
 @api_router.get("/expenses", response_model=List[Expense])
 async def get_expenses(
