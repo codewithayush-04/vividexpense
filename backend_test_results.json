@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-02-05T06:48:54.761788",
-  "total_tests": 7,
-  "passed_tests": 3,
-  "success_rate": 42.857142857142854,
+  "timestamp": "2026-02-05T06:49:34.518308",
+  "total_tests": 16,
+  "passed_tests": 16,
+  "success_rate": 100.0,
   "test_details": [
     {
       "test": "User Registration",
@@ -16,26 +16,71 @@
     },
     {
       "test": "Create Expense (Food)",
-      "success": false,
-      "details": "Expected 200, got 520. Response: Internal Server Error"
+      "success": true,
+      "details": ""
     },
     {
       "test": "Create Expense (Transport)",
-      "success": false,
-      "details": "Expected 200, got 520. Response: Internal Server Error"
+      "success": true,
+      "details": ""
     },
     {
       "test": "Create Expense (Shopping)",
-      "success": false,
-      "details": "Expected 200, got 520. Response: Internal Server Error"
+      "success": true,
+      "details": ""
     },
     {
       "test": "Create Expense (Entertainment)",
-      "success": false,
-      "details": "Expected 200, got 520. Response: Internal Server Error"
+      "success": true,
+      "details": ""
     },
     {
       "test": "Get All Expenses",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Get Expense by ID",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Update Expense",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Filter by Category",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Filter by Date Range",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Monthly Summary",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Monthly Summary Structure",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Export PDF",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Export Excel",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Delete Expense",
       "success": true,
       "details": ""
     }
