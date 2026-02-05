@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-02-05T06:48:54.761788",
+  "total_tests": 7,
+  "passed_tests": 3,
+  "success_rate": 42.857142857142854,
+  "test_details": [
+    {
+      "test": "User Registration",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Get User Profile",
+      "success": true,
+      "details": ""
+    },
+    {
+      "test": "Create Expense (Food)",
+      "success": false,
+      "details": "Expected 200, got 520. Response: Internal Server Error"
+    },
+    {
+      "test": "Create Expense (Transport)",
+      "success": false,
+      "details": "Expected 200, got 520. Response: Internal Server Error"
+    },
+    {
+      "test": "Create Expense (Shopping)",
+      "success": false,
+      "details": "Expected 200, got 520. Response: Internal Server Error"
+    },
+    {
+      "test": "Create Expense (Entertainment)",
+      "success": false,
+      "details": "Expected 200, got 520. Response: Internal Server Error"
+    },
+    {
+      "test": "Get All Expenses",
+      "success": true,
+      "details": ""
+    }
+  ]
+}
