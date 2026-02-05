@@ -1,0 +1,146 @@
+{
+  "design_system_name": "VividSpend_NeoFintech",
+  "identity": {
+    "tone": "Energetic, Trustworthy, Clear, Playful",
+    "aesthetic": "Neo-Fintech: Clean surfaces, vibrant data, rounded geometry",
+    "core_values": ["Clarity in Chaos", "Celebrate Savings", "Frictionless Entry"]
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Outfit, sans-serif",
+      "body": "Manrope, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "installation": "Import from Google Fonts: https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@400;500;700;900&display=swap",
+    "usage_rules": {
+      "headings": "Use Outfit for all h1-h6. Tracking tight (-0.02em). Weight 700 or 900 for Hero.",
+      "body": "Use Manrope for all paragraphs and UI text. Excellent for numbers.",
+      "numbers": "Always use tabular-nums class for financial data tables."
+    }
+  },
+  "colors": {
+    "palette": {
+      "primary": {
+        "DEFAULT": "#6366F1",
+        "foreground": "#FFFFFF",
+        "hover": "#4F46E5"
+      },
+      "secondary": {
+        "DEFAULT": "#EC4899",
+        "foreground": "#FFFFFF"
+      },
+      "background": "#F8FAFC",
+      "surface": "#FFFFFF",
+      "success": "#10B981",
+      "warning": "#F59E0B",
+      "error": "#EF4444",
+      "text": {
+        "primary": "#0F172A",
+        "secondary": "#64748B",
+        "muted": "#94A3B8"
+      }
+    },
+    "charts": [
+      "#6366F1",
+      "#EC4899",
+      "#10B981",
+      "#F59E0B",
+      "#8B5CF6"
+    ],
+    "gradients": {
+      "hero": "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500",
+      "card_hover": "hover:bg-gradient-to-br hover:from-white hover:to-slate-50"
+    }
+  },
+  "layout": {
+    "spacing_scale": "Generous. Use p-6 or p-8 for cards. Gap-6 for grids.",
+    "container": {
+      "max_width": "max-w-7xl",
+      "padding": "px-4 sm:px-6 lg:px-8"
+    },
+    "border_radius": {
+      "card": "rounded-2xl",
+      "button": "rounded-full",
+      "input": "rounded-xl"
+    },
+    "grid_system": {
+      "dashboard": "grid grid-cols-1 md:grid-cols-12 gap-6",
+      "bento_hero": "col-span-12 md:col-span-8 lg:col-span-9",
+      "bento_sidebar": "col-span-12 md:col-span-4 lg:col-span-3"
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-primary text-white rounded-full px-8 py-3 font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200",
+      "secondary": "bg-white text-slate-900 border border-slate-200 rounded-full px-6 py-3 font-medium hover:bg-slate-50 transition-all"
+    },
+    "cards": {
+      "base": "bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow duration-300 p-6",
+      "interactive": "cursor-pointer hover:border-indigo-100 hover:ring-2 hover:ring-indigo-500/20"
+    },
+    "inputs": {
+      "style": "h-12 rounded-xl border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-indigo-500 transition-all"
+    },
+    "charts": {
+      "library": "recharts",
+      "style": "Minimalist. Hide grid lines where possible. Use custom Tooltips with rounded-xl and shadow-xl."
+    }
+  },
+  "motion": {
+    "library": "framer-motion",
+    "transitions": {
+      "page": {
+        "initial": { "opacity": 0, "y": 20 },
+        "animate": { "opacity": 1, "y": 0 },
+        "exit": { "opacity": 0, "y": -20 },
+        "transition": { "duration": 0.3 }
+      },
+      "hover": {
+        "scale": 1.02,
+        "transition": { "type": "spring", "stiffness": 400, "damping": 10 }
+      }
+    }
+  },
+  "assets": {
+    "images": [
+      {
+        "category": "auth_hero",
+        "url": "https://images.unsplash.com/photo-1646015047570-891526ba5259?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "description": "Abstract colorful 3D geometry for login/signup side panel"
+      },
+      {
+        "category": "user_avatar_placeholder",
+        "url": "https://images.unsplash.com/photo-1634552516330-ab1ccc0f605e?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "description": "Friendly user avatar for dashboard header"
+      },
+      {
+        "category": "empty_state",
+        "url": "https://images.unsplash.com/photo-1739055248868-6a763d2e63aa?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "description": "Minimal abstract shapes for empty data states"
+      }
+    ],
+    "icons": "Use lucide-react. Style: Stroke width 2px, rounded corners."
+  },
+  "universal_guidelines": {
+    "general": [
+      "Do not use gradients for text.",
+      "Avoid pure black (#000000). Use Slate-900 (#0F172A) instead.",
+      "All financial amounts must be formatted with commas and currency symbol (₹).",
+      "Use 'sonner' for all toast notifications.",
+      "Ensure all interactive elements have data-testid attributes."
+    ],
+    "accessibility": [
+      "Ensure contrast ratio of at least 4.5:1 for text.",
+      "Focus states must be clearly visible (ring-2 ring-offset-2).",
+      "Use semantic HTML (main, section, article, aside)."
+    ]
+  },
+  "instructions_to_main_agent": [
+    "1. Install dependencies: npm install framer-motion recharts lucide-react clsx tailwind-merge sonner @radix-ui/react-slot",
+    "2. Configure Tailwind: Add the colors and font families from this JSON to tailwind.config.js.",
+    "3. Create a 'Layout' component that handles the Sidebar/Navbar structure.",
+    "4. Build the 'Dashboard' using a Bento Grid approach (CSS Grid).",
+    "5. Use the provided image URLs for the Auth page and Header.",
+    "6. Ensure the 'Add Expense' modal is accessible and uses the 'Outfit' font for the title."
+  ]
+}
