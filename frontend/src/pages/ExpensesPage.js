@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Filter, Search, Calendar, Tag, Pencil, Trash2, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -25,15 +25,7 @@ const ExpensesPage = () => {
     endDate: '',
   });
 
-  useEffect(() => {
-    fetchExpenses();
-  }, []);
-
-  useEffect(() => {
-    applyFilters();
-  }, [expenses, filters]);
-
-  const fetchExpenses = async () => {
+  const fetchExpenses = useCallback(async () => {
     try {
       const response = await axios.get('/expenses');
       setExpenses(response.data);
@@ -42,9 +34,9 @@ const ExpensesPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = [...expenses];
 
     if (filters.search) {
@@ -67,9 +59,17 @@ const ExpensesPage = () => {
     }
 
     setFilteredExpenses(filtered);
-  };
+  }, [expenses, filters]);
 
-  const handleDelete = async (id) => {
+  useEffect(() => {
+    fetchExpenses();
+  }, [fetchExpenses]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [applyFilters]);
+
+  const handleDelete = useCallback(async (id) => {
     if (!window.confirm('Are you sure you want to delete this expense?')) return;
 
     try {
@@ -79,7 +79,7 @@ const ExpensesPage = () => {
     } catch (error) {
       toast.error('Failed to delete expense');
     }
-  };
+  }, [fetchExpenses]);
 
   if (loading) {
     return (

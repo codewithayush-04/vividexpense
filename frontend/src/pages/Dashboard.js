@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Plus, TrendingUp, TrendingDown, Wallet, Download, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -18,11 +18,7 @@ const Dashboard = () => {
     new Date().toISOString().slice(0, 7)
   );
 
-  useEffect(() => {
-    fetchSummary();
-  }, [currentMonth]);
-
-  const fetchSummary = async () => {
+  const fetchSummary = useCallback(async () => {
     try {
       const response = await axios.get(`/expenses/summary/monthly?month=${currentMonth}`);
       setSummary(response.data);
@@ -31,7 +27,11 @@ const Dashboard = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentMonth]);
+
+  useEffect(() => {
+    fetchSummary();
+  }, [fetchSummary]);
 
   const handleExport = async (format) => {
     try {

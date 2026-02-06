@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Calendar, Tag } from 'lucide-react';
 import { toast } from 'sonner';
@@ -8,11 +8,7 @@ const RecentExpenses = ({ month, onUpdate }) => {
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchRecentExpenses();
-  }, [month]);
-
-  const fetchRecentExpenses = async () => {
+  const fetchRecentExpenses = useCallback(async () => {
     try {
       // Calculate date range
       const [year, monthNum] = month.split('-');
@@ -31,7 +27,11 @@ const RecentExpenses = ({ month, onUpdate }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [month]);
+
+  useEffect(() => {
+    fetchRecentExpenses();
+  }, [fetchRecentExpenses]);
 
   if (loading) {
     return (

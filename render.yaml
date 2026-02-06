@@ -23,8 +23,8 @@ services:
     name: vividexpense-frontend
     runtime: node
     plan: free
-    buildCommand: cd frontend && npm install && npm run build
-    startCommand: cd frontend && npx serve -s build -l $PORT
+    buildCommand: cd frontend && npm ci && npm run build
+    startCommand: cd frontend && ./node_modules/.bin/serve -s build -l $PORT
     envVars:
       - key: REACT_APP_BACKEND_URL
         sync: false
