@@ -8,7 +8,11 @@ import Layout from "./components/Layout";
 import axios from "axios";
 import "@/App.css";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL =
+  process.env.REACT_APP_BACKEND_URL ||
+  (process.env.NODE_ENV === "development"
+    ? "http://localhost:8000"
+    : "https://vividexpense-7.onrender.com");
 const API = `${BACKEND_URL}/api`;
 
 // Set up axios defaults
