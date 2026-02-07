@@ -38,22 +38,28 @@ security = HTTPBearer()
 # Create the main app without a prefix
 app = FastAPI()
 
-# CORS first so it wraps all responses (including errors)
-_default_origins = [
-    "https://vividexpense-ns1d.vercel.app",
-    "https://vividexpense.vercel.app",
-    "http://localhost:3000",
-]
+# CORS first so it wraps all responses; allow any origin (auth uses Bearer, not cookies)
 _cors_raw = os.environ.get("CORS_ORIGINS", "").strip()
-_cors_origins = [o.strip() for o in _cors_raw.split(",") if o.strip()] or _default_origins
-_allow_credentials = "*" not in _cors_origins
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=_allow_credentials,
-    allow_origins=_cors_origins,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+if _cors_raw:
+    _cors_origins = [o.strip() for o in _cors_raw.split(",") if o.strip()]
+    _allow_credentials = "*" not in _cors_origins
+    app.add_middleware(
+        CORSMiddleware,
+        allow_credentials=_allow_credentials,
+        allow_origins=_cors_origins,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+else:
+    # No CORS_ORIGINS set: allow all origins (no credentials so * is valid)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_credentials=False,
+        allow_origins=["*"],
+        allow_methods=["*"],
+        allow_headers=["*"],
+        expose_headers=["*"],
+    )
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
