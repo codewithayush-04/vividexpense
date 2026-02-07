@@ -446,6 +446,17 @@ async def export_excel(
         headers={"Content-Disposition": f"attachment; filename=expenses_{month}.xlsx"}
     )
 
+# Root and health (avoid 404 when someone opens backend URL in browser)
+@app.get("/")
+async def root():
+    return {"message": "VividExpense API", "docs": "/docs", "api": "/api"}
+
+
+@api_router.get("/health")
+async def health():
+    return {"status": "ok"}
+
+
 # Include the router in the main app
 app.include_router(api_router)
 
