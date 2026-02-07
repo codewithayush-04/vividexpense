@@ -38,6 +38,23 @@ security = HTTPBearer()
 # Create the main app without a prefix
 app = FastAPI()
 
+# CORS first so it wraps all responses (including errors)
+_default_origins = [
+    "https://vividexpense-ns1d.vercel.app",
+    "https://vividexpense.vercel.app",
+    "http://localhost:3000",
+]
+_cors_raw = os.environ.get("CORS_ORIGINS", "").strip()
+_cors_origins = [o.strip() for o in _cors_raw.split(",") if o.strip()] or _default_origins
+_allow_credentials = "*" not in _cors_origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=_allow_credentials,
+    allow_origins=_cors_origins,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
@@ -459,18 +476,6 @@ async def health():
 
 # Include the router in the main app
 app.include_router(api_router)
-
-_cors_origins = os.environ.get('CORS_ORIGINS', '*').strip().split(',')
-_cors_origins = [o.strip() for o in _cors_origins if o.strip()]
-# When using "*", credentials must be False (browser CORS rule)
-_allow_credentials = '*' not in _cors_origins
-app.add_middleware(
-    CORSMiddleware,
-    allow_credentials=_allow_credentials,
-    allow_origins=_cors_origins if _cors_origins else ['*'],
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # Configure logging
 logging.basicConfig(
