@@ -1,33 +1,45 @@
-# 💰 Expense Tracker App — MERN Stack
+# 💰 VividSpend — Expense Tracker App (MERN Stack)
 
-A full-stack **Expense Tracker Application** built using the MERN Stack (MongoDB, Express.js, React.js, Node.js). This application helps users manage their income and expenses, track financial activities, and visualize spending habits through a clean and responsive interface.
+A full-stack **Expense Tracker Application** built using the **MERN Stack (MongoDB, Express.js, React.js, Node.js)**.  
+VividSpend helps users track expenses, manage categories, and analyze spending patterns through a modern and responsive dashboard.
+
+---
+
+## 📸 Screenshots
+
+### 🔐 Login Page
+![Login Page](./screenshots/login.png)
+
+### 📊 Dashboard
+![Dashboard](./screenshots/dashboard.png)
 
 ---
 
 ## 📌 Features
 
-✅ Add, edit, and delete expenses  
-✅ Track income and expense transactions  
-✅ Real-time balance calculation  
-✅ MERN Stack full-stack architecture  
-✅ REST API with Express & Node.js  
-✅ MongoDB database integration  
-✅ Responsive and modern UI  
-✅ Dynamic state management with React  
+✅ User authentication (Login & Sign Up)  
+✅ Add and manage expenses  
+✅ Category-wise expense tracking  
+✅ Monthly expense overview  
+✅ Total expense calculation  
+✅ Clean & responsive UI  
+✅ Secure REST APIs  
+✅ MongoDB integration  
 
 ---
 
 ## 🛠️ Tech Stack
 
 | Technology | Description |
-|------------|-------------|
-| MongoDB | Database for storing transactions |
-| Express.js | Backend API framework |
-| React.js | Frontend UI development |
-| Node.js | Server-side runtime environment |
-| HTML5 | Structure |
-| CSS3 | Styling |
-| JavaScript (ES6+) | Logic and interactivity |
+|-----------|------------|
+| MongoDB | Database |
+| Express.js | Backend framework |
+| React.js | Frontend library |
+| Node.js | Runtime environment |
+| JWT | Authentication |
+| HTML5 | Markup |
+| CSS3 / Tailwind | Styling |
+| JavaScript (ES6+) | Logic |
 
 ---
 
@@ -35,12 +47,18 @@ A full-stack **Expense Tracker Application** built using the MERN Stack (MongoDB
 
 ### ✅ Prerequisites
 
-Make sure you have installed:
-
 - Node.js (v16+)
 - npm
-- MongoDB (local or cloud like MongoDB Atlas)
+- MongoDB (local or Atlas)
 
+---
+
+### 🔥 Run Locally
+
+#### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/codewithayush-04/ExpenseTracker-MERN.git
 ---
 
 ### 🔥 Steps to Run Locally
