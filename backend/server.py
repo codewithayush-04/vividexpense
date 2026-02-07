@@ -137,6 +137,13 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
         raise HTTPException(status_code=401, detail="Invalid token")
 
 # Auth routes (with and without trailing slash to avoid 405 on redirect)
+@api_router.get("/auth/register")
+@api_router.get("/auth/login")
+async def auth_get_hint():
+    """Opening this URL in a browser sends GET; use POST from the app with JSON body."""
+    return {"detail": "Use POST with JSON body (name, email, password for register; email, password for login)."}
+
+
 @api_router.post("/auth/register", response_model=AuthResponse)
 @api_router.post("/auth/register/", response_model=AuthResponse)
 async def register(user_data: UserRegister):
