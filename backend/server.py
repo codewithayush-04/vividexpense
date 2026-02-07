@@ -136,8 +136,9 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid token")
 
-# Auth routes
+# Auth routes (with and without trailing slash to avoid 405 on redirect)
 @api_router.post("/auth/register", response_model=AuthResponse)
+@api_router.post("/auth/register/", response_model=AuthResponse)
 async def register(user_data: UserRegister):
     # Check if user exists
     existing = await db.users.find_one({"email": user_data.email}, {"_id": 0})
@@ -169,6 +170,7 @@ async def register(user_data: UserRegister):
     return AuthResponse(token=token, user=user)
 
 @api_router.post("/auth/login", response_model=AuthResponse)
+@api_router.post("/auth/login/", response_model=AuthResponse)
 async def login(user_data: UserLogin):
     # Find user
     user_doc = await db.users.find_one({"email": user_data.email}, {"_id": 0})
