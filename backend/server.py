@@ -449,10 +449,14 @@ async def export_excel(
 # Include the router in the main app
 app.include_router(api_router)
 
+_cors_origins = os.environ.get('CORS_ORIGINS', '*').strip().split(',')
+_cors_origins = [o.strip() for o in _cors_origins if o.strip()]
+# When using "*", credentials must be False (browser CORS rule)
+_allow_credentials = '*' not in _cors_origins
 app.add_middleware(
     CORSMiddleware,
-    allow_credentials=True,
-    allow_origins=os.environ.get('CORS_ORIGINS', '*').split(','),
+    allow_credentials=_allow_credentials,
+    allow_origins=_cors_origins if _cors_origins else ['*'],
     allow_methods=["*"],
     allow_headers=["*"],
 )

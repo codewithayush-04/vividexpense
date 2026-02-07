@@ -30,7 +30,20 @@ const AuthPage = ({ onLogin }) => {
       toast.success(isLogin ? 'Welcome back!' : 'Account created successfully!');
       onLogin(response.data.token, response.data.user);
     } catch (error) {
-      toast.error(error.response?.data?.detail || 'Something went wrong');
+      const res = error.response;
+      let message = 'Something went wrong';
+      if (res) {
+        const detail = res.data?.detail;
+        if (typeof detail === 'string') message = detail;
+        else if (Array.isArray(detail) && detail[0]?.msg) message = detail.map((d) => d.msg).join(', ');
+        else if (res.status === 401) message = 'Invalid email or password';
+        else if (res.status === 404) message = 'Backend not found. Check REACT_APP_BACKEND_URL.';
+        else if (res.status >= 500) message = 'Server error. Try again later.';
+        else if (res.status) message = `Error ${res.status}`;
+      } else if (error.code === 'ERR_NETWORK') {
+        message = 'Cannot reach server. Backend may be down or CORS blocked.';
+      }
+      toast.error(message);
     } finally {
       setLoading(false);
     }
