@@ -1,0 +1,87 @@
+{
+  "info": {
+    "name": "VividExpense Auth",
+    "description": "GET and POST auth endpoints for https://vividexpense-7.onrender.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://vividexpense-7.onrender.com" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Auth - GET (browser-style)",
+      "item": [
+        {
+          "name": "GET Register (hint)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/auth/register",
+            "description": "Opens like in browser. Returns hint to use POST."
+          }
+        },
+        {
+          "name": "GET Login (hint)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/auth/login",
+            "description": "Opens like in browser. Returns hint to use POST."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - POST",
+      "item": [
+        {
+          "name": "POST Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"test@example.com\",\n  \"password\": \"yourpassword\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/register",
+            "description": "Register a new user. Returns token and user."
+          }
+        },
+        {
+          "name": "POST Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"yourpassword\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login",
+            "description": "Login. Returns token and user. Copy token for GET /auth/me."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - GET Me (protected)",
+      "item": [
+        {
+          "name": "GET Me (requires token)",
+          "request": {
+            "method": "GET",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "url": "{{baseUrl}}/api/auth/me",
+            "description": "Get current user. Set collection variable 'token' after login."
+          }
+        }
+      ]
+    }
+  ]
+}
