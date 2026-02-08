@@ -2,6 +2,7 @@ from fastapi import FastAPI, APIRouter, HTTPException, Depends, status
 from fastapi.responses import StreamingResponse
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
@@ -38,28 +39,36 @@ security = HTTPBearer()
 # Create the main app without a prefix
 app = FastAPI()
 
-# CORS first so it wraps all responses; allow any origin (auth uses Bearer, not cookies)
-_cors_raw = os.environ.get("CORS_ORIGINS", "").strip()
-if _cors_raw:
-    _cors_origins = [o.strip() for o in _cors_raw.split(",") if o.strip()]
-    _allow_credentials = "*" not in _cors_origins
-    app.add_middleware(
-        CORSMiddleware,
-        allow_credentials=_allow_credentials,
-        allow_origins=_cors_origins,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-else:
-    # No CORS_ORIGINS set: allow all origins (no credentials so * is valid)
-    app.add_middleware(
-        CORSMiddleware,
-        allow_credentials=False,
-        allow_origins=["*"],
-        allow_methods=["*"],
-        allow_headers=["*"],
-        expose_headers=["*"],
-    )
+# CORS: middleware that adds headers to EVERY response (no dependency on Starlette CORS)
+class AddCORSHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request, call_next):
+        if request.method == "OPTIONS":
+            from starlette.responses import Response
+            return Response(
+                status_code=200,
+                headers={
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+                    "Access-Control-Allow-Headers": "*",
+                    "Access-Control-Max-Age": "86400",
+                },
+            )
+        response = await call_next(request)
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, PATCH, OPTIONS"
+        response.headers["Access-Control-Allow-Headers"] = "*"
+        return response
+
+
+app.add_middleware(AddCORSHeadersMiddleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=False,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"],
+)
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
