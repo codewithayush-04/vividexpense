@@ -17,7 +17,7 @@ VividSpend helps users track expenses, manage categories, and analyze spending p
 ---
 
 ## 🛠️ Tech Stack
-
+```
 | Technology | Description |
 |-----------|------------|
 | MongoDB | Database |
@@ -28,7 +28,7 @@ VividSpend helps users track expenses, manage categories, and analyze spending p
 | HTML5 | Markup |
 | CSS3 / Tailwind | Styling |
 | JavaScript (ES6+) | Logic |
-
+```
 ---
 
 ## 🚀 Installation & Setup
