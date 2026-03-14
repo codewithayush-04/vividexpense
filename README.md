@@ -1,6 +1,6 @@
 # 💰 VividSpend — Expense Tracker App (MERN Stack)
 
-#live demo - 
+#live demo - costtracker-18.preview.emergentagent.com/login(hosted by emergent AI)
 
 A full-stack **Expense Tracker Application** built using the **MERN Stack (MongoDB, Express.js, React.js, Node.js)**.  
 VividSpend helps users track expenses, manage categories, and analyze spending patterns through a modern and responsive dashboard.
