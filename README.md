@@ -1,5 +1,7 @@
 # 💰 VividSpend — Expense Tracker App (MERN Stack)
 
+#live demo - 
+
 A full-stack **Expense Tracker Application** built using the **MERN Stack (MongoDB, Express.js, React.js, Node.js)**.  
 VividSpend helps users track expenses, manage categories, and analyze spending patterns through a modern and responsive dashboard.
 
@@ -182,13 +184,11 @@ git push origin feature/new-feature
 
 5. Open a Pull Request
 
----
 
 ## 📝 License
 
 This project is open-source and available under the MIT License.
 
----
 
 ## 📬 Contact
 
